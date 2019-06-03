@@ -1,4 +1,5 @@
 class MoviesController < ApplicationController
+    before_action :find_movie, only: [:show, :edit, :update, :destroy, :favorite]
     def index
         @movies=Movie.all
     end
@@ -14,27 +15,23 @@ class MoviesController < ApplicationController
     end
 
     def show
-        @movie=Movie.find(params[:id])
     end
 
     def edit
-        @movie=Movie.find(params[:id])
     end
 
     def update
-        @movie=Movie.find(params[:id])
         @movie.update(movie_params)
         redirect_to movies_path
     end
 
     def destroy
-        @movie=Movie.find(params[:id])
         @movie.destroy
         redirect_to movies_path
     end
     
     def favorite
-        @movie=Movie.find(params[:id])
+        
         if @movie.favorite == true
         @movie.favorite = false
         elsif @movie.favorite == false
@@ -48,5 +45,9 @@ class MoviesController < ApplicationController
 
     def movie_params    
         params.require(:movie).permit(:title, :year, :favorite)
+    end
+
+    def find_movie
+        @movie=Movie.find(params[:id])
     end
 end
