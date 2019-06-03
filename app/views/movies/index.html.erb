@@ -1,0 +1,52 @@
+
+<h1 class = "text-center font-weight-bold">Películas Favoritas</h1>
+<div class = "row">
+    <% @movies.each do|movie| %>
+    <% if movie.favorite == true %>
+    <div class= ' text-center col-md-3 px-3 my-3'>
+        <div class="card border-warning mb-3" style="max-width: 20rem;">
+            <h4 class="card-header">Título: <%= movie.title %></h4>
+            <div class="card-body">
+                <p class="card-text">Película favorita</p>
+                <h5 class="card-title">Año: <%= movie.year %></h5>
+                <p class="card-text"><%= link_to "Eliminar de favoritos", favorite_movie_path(movie), class: "btn btn-outline-danger" %></p>
+                <%= link_to 'Ver', movie %>
+                <%= link_to 'Editar', edit_movie_path(movie) %>
+                <%= link_to "Borrar", movie, method: :delete, data: {confirm: 'Estás seguro?'} %>
+            </div>
+        </div>        
+    </div> 
+    <% end %>
+    <% end %>  
+</div>
+
+<h1 class = "text-center font-weight-bold">Películas</h1>
+<div class = "row">
+    <% @movies.each do|movie| %>
+    <% if movie.favorite == false %>
+    <div class= ' text-center col-md-3 px-3 my-3'>
+        <div class="card border-success mb-3" style="max-width: 20rem;">
+            <h4 class="card-header">Título: <%= movie.title %></h4>
+            <div class="card-body">
+                <h5 class="card-title">Año: <%= movie.year %></h5>
+                <p class="card-text"><%= link_to "Añadir", favorite_movie_path(movie), class: "btn btn-outline-warning" %></p>
+                <%= link_to 'Ver', movie %>
+                <%= link_to 'Editar', edit_movie_path(movie) %>
+                <%= link_to "Borrar", movie, method: :delete, data: {confirm: 'Estás seguro?'} %>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <br>
+    <% end %>
+    <br>
+    <% end %>
+</div>
+
+
+<br>
+
+<br>
+<%= link_to 'Agregar nueva película', movies_new_path%>

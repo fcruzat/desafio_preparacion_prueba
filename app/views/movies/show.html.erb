@@ -1,0 +1,6 @@
+<%= @movie.title %>
+<%= @movie.year %>
+<br>
+<%= link_to 'Editar', edit_movie_path(@movie) %>
+<%= link_to "Borrar", @movie, method: :delete, data: {confirm: 'Estás seguro?'} %>
+<%= link_to "Regresar", movies_path %>
